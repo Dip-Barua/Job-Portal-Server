@@ -54,11 +54,24 @@ app.get('/jobs/:id' , async(req, res) => {
 )
 
 
+app.post('/jobs', async(req, res) => {
+  
+  const newJob = req.body;
+  const result = await jobsCollection.insertOne(newJob);
+  res.send(result);
+
+})
+
+
+
+
+
 //job application api
 app.get('/job-application', async(req, res) =>{
   const email = req.query.email;
   const query = { applicant_email: email}
     const result = await jobApplicationsCollection.find(query).toArray();
+
 
 
 for(const application of result){
